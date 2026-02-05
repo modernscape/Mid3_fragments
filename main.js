@@ -4,7 +4,7 @@ import {RGBELoader} from "three/addons/loaders/RGBELoader.js"
 import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js"
 import {PMREMGenerator} from "three"
 // import * as Utils from "./topUtils.js"
-import * as Utils from "./topUtils"
+import * as Utils from "./topUtils.js"
 
 import {LineGeometry} from "three/addons/lines/LineGeometry.js"
 import {LineMaterial} from "three/addons/lines/LineMaterial.js"
