@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <!-- <script src="/list.js"></script> -->
+    <!-- <script src="/src/config.js"></script> -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="webgl"></div>
+
+    <script type="x-shader/x-vertex" id="vertexShader">
+      precision mediump float; // ⭐️⭐️⭐️⭐️⭐️ 必要
+
+      attribute vec3 position;
+      //attribute vec3 color;
+      attribute float alpha;
+      attribute vec2 rand; // -1.0 ～ 1.0
+
+      uniform mat4 projectionMatrix;
+      uniform mat4 modelViewMatrix;
+
+      uniform float u_ratio;
+      uniform float u_time;
+
+      varying float v_alpha;
+      varying vec2 v_rand;
+
+      void main() {
+
+        v_rand = rand;
+        v_alpha = alpha;
+
+        float radiusRange = 15.0;
+        float radiusRandX = radiusRange * sin(u_time * rand.x + rand.y * 5.0);
+        float radiusRandY = radiusRange * cos(u_time * rand.x + rand.y * 5.0);
+        float radiusRandAll = radiusRandX + radiusRandY;
+        float finalRadius = 5.0 + radiusRandAll;
+
+        float moveRange = 8.0;
+        float moveRandX = moveRange * sin(u_time + rand.x * rand.y * 50.0);
+        float moveRandY = moveRange * cos(u_time + rand.x * rand.y * 50.0);
+        vec3 finalPosition = position + vec3(moveRandX, moveRandY, 0);
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(finalPosition, 1.0);
+        gl_PointSize = finalRadius;
+      }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentShader">
+      precision mediump float; // ⭐️⭐️⭐️⭐️⭐️ 必要
+
+      uniform float u_time;
+      varying float v_alpha;
+      varying vec2 v_rand;
+
+      /**
+       * Referenced | https://iquilezles.org/www/articles/palettes/palettes.htm
+       */
+      vec3 pal( in float t, in vec3 a, in vec3 b, in vec3 c, in vec3 d ) {
+       return a + b*cos( 6.28318*(c*t+d) );
+      }
+
+      void main() {
+
+        vec2 temp = gl_PointCoord - vec2(0.5);
+        float f = dot(temp, temp);
+        if (f > 0.25) {
+          discard;
+        }
+
+        vec3 color = pal(
+          ((u_time * v_rand.x + v_rand.y) / 10.0) + v_rand.x * 10.0,
+          vec3(0.5, 0.5, 0.5),
+          vec3(0.5, 0.5, 0.5),
+          vec3(1.0, 1.0, 1.0),
+          vec3(0.0, 0.33, 0.67)
+        );
+        gl_FragColor = vec4(color, v_alpha);
+
+      }
+    </script>
+
+    <!-- <script src="/src/_js/gsap.min.js"></script> -->
+    <!-- <script src="/src/_js/ScrollTrigger.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="/src/js/ammo.js"></script>
+    <!-- <script src="/src/js/utils.js"></script> -->
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
