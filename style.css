@@ -1,0 +1,164 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+*:focus {
+  outline: none;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+#webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+span.title {
+  position: fixed;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  color: #fff;
+  text-shadow: 0px 0px 3px #000000ab;
+  opacity: 0.8;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 100;
+  color: #dddddd;
+}
+
+span.title::first-line {
+  font-size: 1.9rem;
+  color: #fff;
+}
+
+span.title a {
+  color: #235450;
+  font-size: 1.2rem;
+  /* line-height: 0.8rem; */
+  display: block;
+  text-shadow: none;
+}
+
+body {
+  background-color: #000;
+}
+
+/* add */
+* {
+  -webkit-user-select: none; /* Chrome or Safari */
+  -moz-user-select: none; /* FireFox */
+  -ms-user-select: none; /* IE */
+  -o-user-select: none; /* Opera */
+  user-select: none;
+}
+:root {
+  --main-color: rgb(175, 175, 175);
+}
+div#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+html {
+  height: 100%;
+}
+body {
+  background-image: url(./img/white4.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+#back-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.original-css-backdropFilter {
+  width: 100%;
+  height: 100%;
+}
+#text {
+  color: var(--main-color);
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+p.tap {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  opacity: 0.9;
+  background-image: url(./img/tap.png);
+  background-size: contain;
+  user-select: none;
+  opacity: 1;
+}
+
+button {
+  position: absolute;
+  z-index: 100000000;
+  top: 5px;
+  right: 5px;
+  width: 10vw;
+  min-width: 100px;
+  height: 4vh;
+  min-height: 50px;
+}
+
+#info {
+  position: absolute;
+  right: 9px;
+  bottom: 5px;
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: 100;
+  opacity: 0.8;
+  color: rgb(131, 255, 131);
+  z-index: 1001;
+}
+
+#hoverText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(255, 5, 242);
+  color: #fff;
+  z-index: 1002;
+  padding: 1px 10px;
+  opacity: 0;
+  transform-origin: center left; /* 左上を基点に拡大縮小 */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-radius: 1px;
+}
+
+#hoverText.on {
+  opacity: 0.8;
+  transform: scale(1.2);
+}
