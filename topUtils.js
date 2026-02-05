@@ -580,8 +580,8 @@ export const geometryPositionsWithNumber = (bufferGeometry, positionsNum) => {
 Promise使用
 */
 const fontPasses = [
-  "/src/fonts/gentilis_bold.typeface.json", //
-  "/src/fonts/helvetiker_bold.typeface.json",
+  "./fonts/gentilis_bold.typeface.json", //
+  "./fonts/helvetiker_bold.typeface.json",
 ]
 export const make3DText = (str, color, size, fontPassIndex = 0) => {
   return new Promise((resolve, reject) => {
