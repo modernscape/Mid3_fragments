@@ -37,7 +37,7 @@ class Stage {
       lookAt: new THREE.Vector3(0, 0, 0),
       x: 0,
       y: 0,
-      z: 500,
+      z: 1000,
     }
     this.scene = null
     this.camera = null
